@@ -1,4 +1,5 @@
 import { obtenerProductos } from "./apiProductos.js";
+import { mostrarProductos } from "./interfazUsuario.js";
 
 async function iniciarAplicacion() {
 
@@ -6,7 +7,7 @@ async function iniciarAplicacion() {
 
         const listaProductos = await obtenerProductos();
 
-        console.log(listaProductos);
+        mostrarProductos(listaProductos);
 
     } catch (error) {
 
@@ -17,3 +18,4 @@ async function iniciarAplicacion() {
 }
 
 iniciarAplicacion();
+
