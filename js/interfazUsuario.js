@@ -12,6 +12,9 @@ const botonAgregarCarritoModal = document.getElementById("botonAgregarCarritoMod
 const elementoModalProducto = document.getElementById("modalProducto");
 const modalProducto = new bootstrap.Modal(elementoModalProducto);
 
+const contenedorProductosCarrito = document.getElementById("contenedorProductosCarrito");
+const badgeCantidadCarrito = document.getElementById("badgeCantidadCarrito");
+
 botonAgregarCarritoModal.addEventListener("click",manejarClickAgregarCarrito);
 
 let listaProductosDisponibles = [];
