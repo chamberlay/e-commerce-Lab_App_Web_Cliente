@@ -1,5 +1,20 @@
 let carritoCompras = [];
 
+function actualizarCarrito() {
+
+    console.table(carritoCompras);
+
+    guardarCarritoEnLocalStorage();
+
+}
+
+function guardarCarritoEnLocalStorage() {
+
+    const carritoFormatoJson = JSON.stringify(carritoCompras);
+
+    localStorage.setItem("carritoCompras", carritoFormatoJson);
+}
+
 export function agregarProductoAlCarrito(producto) {
     const existeProductoEnCarrito = carritoCompras.some((productoCarrito) => {
         return productoCarrito.id === producto.id;
@@ -21,5 +36,15 @@ export function agregarProductoAlCarrito(producto) {
         carritoCompras.push(productoCarrito);
     }
 
-    console.table(carritoCompras);
+    actualizarCarrito();
+}
+
+export function inicializarCarrito() {
+    const carritoFormatoJson = localStorage.getItem("carritoCompras");
+
+    if (carritoFormatoJson) {
+        carritoCompras = JSON.parse(carritoFormatoJson);
+    }
+
+    console.log(carritoCompras);
 }
