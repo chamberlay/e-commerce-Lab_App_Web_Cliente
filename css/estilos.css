@@ -9,3 +9,8 @@ body{
 .card:hover{
     transform:translateY(-5px);
 }
+
+.imagenProducto {
+    height: 250px;
+    object-fit: contain;
+}
