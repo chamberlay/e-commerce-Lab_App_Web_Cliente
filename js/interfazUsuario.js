@@ -5,11 +5,16 @@ const nombreProductoModal = document.getElementById("nombreProductoModal");
 const precioProductoModal = document.getElementById("precioProductoModal");
 const categoriaProductoModal = document.getElementById("categoriaProductoModal");
 const descripcionProductoModal = document.getElementById("descripcionProductoModal");
+const botonAgregarCarritoModal = document.getElementById("botonAgregarCarritoModal");
 
 const elementoModalProducto = document.getElementById("modalProducto");
 const modalProducto = new bootstrap.Modal(elementoModalProducto);
 
+botonAgregarCarritoModal.addEventListener("click",manejarClickAgregarCarrito);
+
 let listaProductosDisponibles = [];
+
+let productoSeleccionado = null;
 
 function crearTarjetaProducto({id, title, price, image}) {
 
@@ -57,7 +62,10 @@ function manejarClickVerDetalles(evento) {
     mostrarModalProducto(producto);
 }
 
-function mostrarModalProducto({title, price, image, category, description}) {
+function mostrarModalProducto(producto) {
+    productoSeleccionado = producto;
+
+    const { title, price, image, category, description } = producto;
 
     imagenProductoModal.src = image;
     nombreProductoModal.textContent = title;
@@ -66,6 +74,12 @@ function mostrarModalProducto({title, price, image, category, description}) {
     descripcionProductoModal.textContent = description;
 
     modalProducto.show();
+}
+
+function manejarClickAgregarCarrito() {
+
+    console.log(productoSeleccionado);
+
 }
 
 export function mostrarProductos(listaProductos) {
