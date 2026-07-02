@@ -1,3 +1,5 @@
+import { agregarProductoAlCarrito } from "./carritoCompras.js";
+
 const contenedorProductos = document.getElementById("contenedorProductos");
 
 const imagenProductoModal = document.getElementById("imagenProductoModal");
@@ -78,7 +80,7 @@ function mostrarModalProducto(producto) {
 
 function manejarClickAgregarCarrito() {
 
-    console.log(productoSeleccionado);
+    agregarProductoAlCarrito(productoSeleccionado);
 
 }
 
