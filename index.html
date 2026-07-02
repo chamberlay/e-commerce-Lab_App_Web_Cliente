@@ -25,6 +25,68 @@
         </div>
     </main>
 
+    <div
+        class="modal fade"
+        id="modalProducto"
+        tabindex="-1"
+        aria-labelledby="tituloModalProducto"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5
+                        class="modal-title"
+                        id="tituloModalProducto">
+
+                        Detalle del producto
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Cerrar">
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 text-center">
+                            <img
+                                id="imagenProductoModal"
+                                class="img-fluid imagenProductoModal"
+                                alt="Producto">
+                        </div>
+                        <div class="col-md-7">
+                            <h3 id="nombreProductoModal"></h3>
+                            <h4
+                                id="precioProductoModal"
+                                class="text-success my-3">
+                            </h4>
+                            <p
+                                id="categoriaProductoModal"
+                                class="badge bg-secondary">
+                            </p>
+                            <p id="descripcionProductoModal"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button
+                        id="botonAgregarCarritoModal"
+                        class="btn btn-primary">
+
+                        Agregar al carrito
+
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

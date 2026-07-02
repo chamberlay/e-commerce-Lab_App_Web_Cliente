@@ -14,3 +14,12 @@ body{
     height: 250px;
     object-fit: contain;
 }
+
+.imagenProductoModal {
+
+    max-height: 350px;
+
+    object-fit: contain;
+
+}
+

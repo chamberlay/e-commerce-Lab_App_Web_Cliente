@@ -1,5 +1,16 @@
 const contenedorProductos = document.getElementById("contenedorProductos");
 
+const imagenProductoModal = document.getElementById("imagenProductoModal");
+const nombreProductoModal = document.getElementById("nombreProductoModal");
+const precioProductoModal = document.getElementById("precioProductoModal");
+const categoriaProductoModal = document.getElementById("categoriaProductoModal");
+const descripcionProductoModal = document.getElementById("descripcionProductoModal");
+
+const elementoModalProducto = document.getElementById("modalProducto");
+const modalProducto = new bootstrap.Modal(elementoModalProducto);
+
+let listaProductosDisponibles = [];
+
 function crearTarjetaProducto({id, title, price, image}) {
 
     return `
@@ -35,16 +46,41 @@ function crearTarjetaProducto({id, title, price, image}) {
 
 }
 
-export function mostrarProductos(listaProductos) {
+function manejarClickVerDetalles(evento) {
 
-    let tarjetasProductos = "";
+    const idProducto = Number(evento.target.dataset.id);
 
-    listaProductos.forEach((producto) => {
-
-        tarjetasProductos += crearTarjetaProducto(producto);
-
+    const producto = listaProductosDisponibles.find((producto) => {
+        return producto.id === idProducto;
     });
 
-    contenedorProductos.innerHTML = tarjetasProductos;
-
+    mostrarModalProducto(producto);
 }
+
+function mostrarModalProducto({title, price, image, category, description}) {
+
+    imagenProductoModal.src = image;
+    nombreProductoModal.textContent = title;
+    precioProductoModal.textContent = `$${price}`;
+    categoriaProductoModal.textContent = category;
+    descripcionProductoModal.textContent = description;
+
+    modalProducto.show();
+}
+
+export function mostrarProductos(listaProductos) {
+    listaProductosDisponibles = listaProductos;
+
+    let tarjetasProductos = "";
+    listaProductos.forEach((producto) => {
+        tarjetasProductos += crearTarjetaProducto(producto);
+    });
+    contenedorProductos.innerHTML = tarjetasProductos;
+    
+    const botonesVerDetalles =
+    document.querySelectorAll(".botonVerDetalles");
+    botonesVerDetalles.forEach((boton) => {
+        boton.addEventListener("click", manejarClickVerDetalles);
+    });
+}
+
