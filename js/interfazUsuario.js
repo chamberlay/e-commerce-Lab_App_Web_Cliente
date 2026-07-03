@@ -12,9 +12,6 @@ const botonAgregarCarritoModal = document.getElementById("botonAgregarCarritoMod
 const elementoModalProducto = document.getElementById("modalProducto");
 const modalProducto = new bootstrap.Modal(elementoModalProducto);
 
-const contenedorProductosCarrito = document.getElementById("contenedorProductosCarrito");
-const badgeCantidadCarrito = document.getElementById("badgeCantidadCarrito");
-
 botonAgregarCarritoModal.addEventListener("click",manejarClickAgregarCarrito);
 
 let listaProductosDisponibles = [];
@@ -90,14 +87,14 @@ function manejarClickAgregarCarrito() {
 export function mostrarProductos(listaProductos) {
     listaProductosDisponibles = listaProductos;
 
-    let tarjetasProductos = "";
+    let htmlTarjetasProductos = "";
     listaProductos.forEach((producto) => {
-        tarjetasProductos += crearTarjetaProducto(producto);
+        htmlTarjetasProductos += crearTarjetaProducto(producto);
     });
-    contenedorProductos.innerHTML = tarjetasProductos;
+    contenedorProductos.innerHTML = htmlTarjetasProductos;
     
     const botonesVerDetalles =
-    document.querySelectorAll(".botonVerDetalles");
+    contenedorProductos.querySelectorAll(".botonVerDetalles");
     botonesVerDetalles.forEach((boton) => {
         boton.addEventListener("click", manejarClickVerDetalles);
     });

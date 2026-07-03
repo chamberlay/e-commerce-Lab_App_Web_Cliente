@@ -1,11 +1,14 @@
 let carritoCompras = [];
 
-function actualizarCarrito() {
+const badgeCantidadCarrito = document.getElementById("badgeCantidadCarrito");
 
-    console.table(carritoCompras);
+function actualizarCarrito() {
 
     guardarCarritoEnLocalStorage();
 
+    actualizarBadgeCarrito();
+
+    mostrarProductosCarrito();
 }
 
 function guardarCarritoEnLocalStorage() {
@@ -13,6 +16,26 @@ function guardarCarritoEnLocalStorage() {
     const carritoFormatoJson = JSON.stringify(carritoCompras);
 
     localStorage.setItem("carritoCompras", carritoFormatoJson);
+}
+
+function actualizarBadgeCarrito() {
+
+    const cantidadProductos = carritoCompras.reduce((total, producto) => {
+
+        return total + producto.cantidad;
+
+    }, 0);
+
+    badgeCantidadCarrito.textContent = cantidadProductos;
+
+    badgeCantidadCarrito.classList.toggle(
+        "d-none",
+        cantidadProductos === 0
+    );
+}
+
+function mostrarProductosCarrito() {
+
 }
 
 export function agregarProductoAlCarrito(producto) {
@@ -46,5 +69,5 @@ export function inicializarCarrito() {
         carritoCompras = JSON.parse(carritoFormatoJson);
     }
 
-    console.log(carritoCompras);
+    actualizarCarrito();
 }
