@@ -11,9 +11,32 @@
 <body>
 
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container">
+        <div class="container d-flex align-items-center">
             
-            <a class="navbar-brand" href="#">Fake Shop</a>
+            <a class="navbar-brand" href="#">
+                Fake Shop
+            </a>
+
+            <div class="d-flex align-items-center gap-2 flex-grow-1 justify-content-center">
+                <select
+                    id="selectorCategoriaProductos"
+                    class="form-select"
+                    style="max-width: 180px;">
+
+                    <option value="todas">Categorías</option>
+                    <option value="men's clothing">Men's Clothing</option>
+                    <option value="women's clothing">Women's Clothing</option>
+                    <option value="jewelery">Jewelery</option>
+                    <option value="electronics">Electronics</option>
+                </select>
+
+                <input
+                    type="search"
+                    id="campoBusquedaProductos"
+                    class="form-control"
+                    placeholder="Buscar producto..."
+                    style="max-width: 450px;">
+            </div>
 
             <button
                 class="btn btn-outline-light position-relative"
@@ -28,9 +51,7 @@
                     id="badgeCantidadCarrito">
 
                     0
-
                 </span>
-
             </button>
         </div>
     </nav>

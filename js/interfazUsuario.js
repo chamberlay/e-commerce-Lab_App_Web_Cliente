@@ -1,7 +1,8 @@
 import { agregarProductoAlCarrito } from "./carritoCompras.js";
 
 const contenedorProductos = document.getElementById("contenedorProductos");
-
+const campoBusquedaProductos = document.getElementById("campoBusquedaProductos");
+const selectorCategoriaProductos = document.getElementById("selectorCategoriaProductos");
 const imagenProductoModal = document.getElementById("imagenProductoModal");
 const nombreProductoModal = document.getElementById("nombreProductoModal");
 const precioProductoModal = document.getElementById("precioProductoModal");
@@ -12,9 +13,22 @@ const botonAgregarCarritoModal = document.getElementById("botonAgregarCarritoMod
 const elementoModalProducto = document.getElementById("modalProducto");
 const modalProducto = new bootstrap.Modal(elementoModalProducto);
 
-botonAgregarCarritoModal.addEventListener("click",manejarClickAgregarCarrito);
+botonAgregarCarritoModal.addEventListener(
+    "click",
+    manejarClickAgregarCarrito
+);
 
-let listaProductosDisponibles = [];
+campoBusquedaProductos.addEventListener(
+    "input",
+    manejarBusquedaProductos
+);
+
+selectorCategoriaProductos.addEventListener(
+    "change",
+    manejarCambioCategoria
+);
+
+let listaProductosOriginal = [];
 
 let productoSeleccionado = null;
 
@@ -57,7 +71,7 @@ function manejarClickVerDetalles(evento) {
 
     const idProducto = Number(evento.target.dataset.id);
 
-    const producto = listaProductosDisponibles.find((producto) => {
+    const producto = listaProductosOriginal.find((producto) => {
         return producto.id === idProducto;
     });
 
@@ -92,8 +106,43 @@ function manejarClickAgregarCarrito() {
     });
 }
 
+function manejarBusquedaProductos() {
+
+    const textoBusqueda =
+        campoBusquedaProductos.value.toLowerCase();
+
+    const productosFiltrados =
+        listaProductosOriginal.filter((producto) => {
+            return producto.title
+                .toLowerCase()
+                .includes(textoBusqueda);
+        });
+
+    mostrarProductos(productosFiltrados);
+}
+
+function manejarCambioCategoria() {
+
+    const categoriaSeleccionada =
+        selectorCategoriaProductos.value;
+
+    if (categoriaSeleccionada === "todas") {
+        mostrarProductos(listaProductosOriginal);
+        return;
+    }
+
+    const productosFiltrados =
+        listaProductosOriginal.filter((producto) => {
+            return producto.category === categoriaSeleccionada;
+        });
+
+    mostrarProductos(productosFiltrados);
+}
+
 export function mostrarProductos(listaProductos) {
-    listaProductosDisponibles = listaProductos;
+    if (listaProductosOriginal.length === 0) {
+        listaProductosOriginal = [...listaProductos];
+    }
 
     let htmlTarjetasProductos = "";
     listaProductos.forEach((producto) => {
