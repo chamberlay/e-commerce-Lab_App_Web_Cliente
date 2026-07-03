@@ -9,17 +9,25 @@ contenedorProductosCarrito.addEventListener(
 );
 
 const textoTotalCarrito = document.getElementById("textoTotalCarrito");
+
 const botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
+botonFinalizarCompra.addEventListener(
+    "click",
+    finalizarCompra
+);
+const botonVaciarCarrito = document.getElementById("botonVaciarCarrito");
+botonVaciarCarrito.addEventListener(
+    "click",
+    vaciarCarrito
+);
 
 function actualizarCarrito() {
 
     guardarCarritoEnLocalStorage();
-
     actualizarBadgeCarrito();
-
     actualizarTotalCarrito();
-
     mostrarProductosCarrito();
+    actualizarEstadoBotonesCarrito();
 }
 
 function guardarCarritoEnLocalStorage() {
@@ -57,6 +65,13 @@ function actualizarTotalCarrito() {
         `$${totalCarrito.toFixed(2)}`;
 }
 
+function actualizarEstadoBotonesCarrito() {
+
+    const carritoVacio = carritoCompras.length === 0;
+    botonFinalizarCompra.disabled = carritoVacio;
+    botonVaciarCarrito.disabled = carritoVacio;
+}
+
 function crearTarjetaProductoCarrito({id, title, price, image, cantidad}) {
 
     return `
@@ -77,14 +92,15 @@ function crearTarjetaProductoCarrito({id, title, price, image, cantidad}) {
                         </h6>
 
                         <p class="text-success fw-bold mb-1">
-                            $${price}
+                            Total: $${(price * cantidad).toFixed(2)}
                         </p>
 
                         <div class="d-flex align-items-center gap-2 mt-2">
                             <button
                                 class="btn btn-sm btn-outline-secondary botonDisminuirCantidad"
-                                data-id="${id}">
-
+                                data-id="${id}"
+                                ${cantidad === 1 ? "disabled" : ""}>
+                                
                                 <i class="bi bi-dash"></i>
                             </button>
 
@@ -234,6 +250,27 @@ export function inicializarCarrito() {
     if (carritoFormatoJson) {
         carritoCompras = JSON.parse(carritoFormatoJson);
     }
+
+    actualizarCarrito();
+}
+
+function finalizarCompra() {
+
+    carritoCompras = [];
+
+    actualizarCarrito();
+
+    Swal.fire({
+        icon: "success",
+        title: "¡Compra realizada!",
+        text: "Gracias por su compra.",
+        confirmButtonText: "Aceptar"
+    });
+}
+
+function vaciarCarrito() {
+
+    carritoCompras = [];
 
     actualizarCarrito();
 }

@@ -81,7 +81,15 @@ function mostrarModalProducto(producto) {
 function manejarClickAgregarCarrito() {
 
     agregarProductoAlCarrito(productoSeleccionado);
+    modalProducto.hide();
 
+    Swal.fire({
+        icon: "success",
+        title: "Producto agregado",
+        text: "El producto fue agregado al carrito.",
+        timer: 1500,
+        showConfirmButton: false
+    });
 }
 
 export function mostrarProductos(listaProductos) {
